@@ -1,7 +1,9 @@
 
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -32,10 +34,10 @@ public class Library {
 	}
 
 	public void printBooksPrice(boolean mode) {
-		TreeMap<Integer,Book> books = getBooksPrice();		
+		NavigableMap<Integer,Book> books = getBooksPrice();		
 		// TreeMap<Integer,Book> list = getBooksPrice();
 		if (mode) {
-			books = (TreeMap<Integer,Book>) books.descendingMap();
+			books = books.descendingMap();
 		}
 		
 		for (Book b : books.values()) {
@@ -43,4 +45,36 @@ public class Library {
 		}
 	}
 	
+	public TreeMap<Author,Book[]> authorsBooks() {
+	
+	TreeMap<Author,Book[]> authorBooks = new TreeMap<Author,Book[]>();
+	
+	Set<Map.Entry<String,Book>> bookset = shelves.entrySet();
+	 
+	 for (Author auth : registeredAuth()) {
+		 
+	 }
+	
+	return authorBooks;
+	}
+		 
+	
+	public Set<Map.Entry<String,Book>> getEntrySet() {
+		return  shelves.entrySet();
+	}
+	
+	public Set<Author> registeredAuth() {
+		Set<Author> result = new HashSet<Author>();
+		
+		for (Entry<String,Book> entry : getEntrySet()) {
+			for (Author auth : entry.getValue().getAuthors()) {
+				result.add(auth);
+			}
+		}
+	
+		return result;
+	}
+
+	// idee: en iterant sur la treemap, bloquer auteur, regarder s'il a pa d'autres bouquin, et le cas échéant lui ajouter à sa liste de boukin
+
 }
