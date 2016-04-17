@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 public class Library {
@@ -45,17 +46,22 @@ public class Library {
 		}
 	}
 	
-	public TreeMap<Author,Book[]> authorsBooks() {
+	public TreeMap<Author,Set<Book>> authorsBooks() {
 	
-	TreeMap<Author,Book[]> authorBooks = new TreeMap<Author,Book[]>();
-	
-	Set<Map.Entry<String,Book>> bookset = shelves.entrySet();
+		TreeMap<Author,Set<Book>> authorBooks = new TreeMap<Author,Set<Book>>();
+		//Set<Book> booksPerAuth=null;
+		Set<Map.Entry<String,Book>> bookset = shelves.entrySet();
 	 
-	 for (Author auth : registeredAuth()) {
-		 
-	 }
-	
-	return authorBooks;
+		for (Entry<String,Book> entry : bookset) {
+			for (Author auth : entry.getValue().getAuthors()) {
+				if (!authorBooks.containsValue(auth)) {
+					authorBooks.put(auth, new TreeSet<Book>());
+				}
+				authorBooks.get(auth).add(entry.getValue());
+			}
+			
+		}
+		return authorBooks;
 	}
 		 
 	
@@ -75,6 +81,6 @@ public class Library {
 		return result;
 	}
 
-	// idee: en iterant sur la treemap, bloquer auteur, regarder s'il a pa d'autres bouquin, et le cas échéant lui ajouter à sa liste de boukin
+	// idee: en iterant sur la treemap, bloquer auteur, regarder s'il a pa d'autres bouquin, et le cas ï¿½chï¿½ant lui ajouter ï¿½ sa liste de boukin
 
 }
