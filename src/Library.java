@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 
+
 public class Library {
 	private TreeMap<String,Book> shelves=new TreeMap<String,Book>();
 	
@@ -54,7 +55,7 @@ public class Library {
 	 
 		for (Entry<String,Book> entry : bookset) {
 			for (Author auth : entry.getValue().getAuthors()) {
-				if (!authorBooks.containsValue(auth)) {
+				if (!authorBooks.containsKey(auth)) {
 					authorBooks.put(auth, new TreeSet<Book>());
 				}
 				authorBooks.get(auth).add(entry.getValue());
@@ -65,7 +66,7 @@ public class Library {
 	}
 		 
 	
-	public Set<Map.Entry<String,Book>> getEntrySet() {
+	private Set<Map.Entry<String,Book>> getEntrySet() {
 		return  shelves.entrySet();
 	}
 	
