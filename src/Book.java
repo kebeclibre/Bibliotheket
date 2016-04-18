@@ -1,6 +1,6 @@
 import java.util.TreeSet;
 
-public class Book {
+public class Book implements Comparable<Book>{
 	private String title;
 	private TreeSet<Author> authors=new TreeSet<Author>();
 	private String isbn;
@@ -138,6 +138,11 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [title=" + title + ", isbn=" + isbn + ", price=" + price + ", Authors=" + getAuthorsString() + "]";
+	}
+
+	@Override
+	public int compareTo(Book o) {
+		return this.hashCode()-o.hashCode();	
 	}
 
 	

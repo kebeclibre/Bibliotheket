@@ -1,8 +1,17 @@
 
-public class Author {
+public class Author implements Comparable<Author> {
 	
 	private String lastname;
 	private String firstname;
+	
+	public Author() {
+		
+	}
+	
+	public Author(String last, String first) {
+		this.firstname = first;
+		this.lastname = last;
+	}
 	
 	public String getLastname() {
 		return lastname;
@@ -48,6 +57,11 @@ public class Author {
 		} else if (!lastname.equals(other.lastname))
 			return false;
 		return true;
+	}
+	@Override
+	public int compareTo(Author arg0) {
+		return this.hashCode()-arg0.hashCode();
+		
 	}
 	
 	
