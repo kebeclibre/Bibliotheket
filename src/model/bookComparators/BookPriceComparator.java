@@ -1,6 +1,8 @@
-package model;
+package model.bookComparators;
 
 import java.util.Comparator;
+
+import model.Book;
 
 public class BookPriceComparator implements Comparator<Book>{
 

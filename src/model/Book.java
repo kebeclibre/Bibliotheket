@@ -6,12 +6,15 @@ public class Book implements Comparable<Book>{
 	private TreeSet<Author> authors=new TreeSet<Author>();
 	private String isbn;
 	private TreeSet<String> category=new TreeSet<String>();
-	private int price; 
+	private int price;
+	private String categoryString;
 
 	public Book(String isbn, String title){
 		this.isbn = isbn;
 		this.title = title;
 	}
+	
+	public Book() {}
 	
 	public Book(String isbn, String title, Author... authors) {
 		this(isbn,title);
@@ -22,6 +25,10 @@ public class Book implements Comparable<Book>{
 		this(isbn,title);
 		stringToAuthor(authors);
 		
+	}
+	
+	public TreeSet<String> getCategories() {
+		return this.category;
 	}
 	
 	
@@ -69,7 +76,7 @@ public class Book implements Comparable<Book>{
 		return isbn;
 	}
 	
-	public String getCategory() {
+	public String getCategoryAsString() {
 		StringBuilder categories = new StringBuilder();
 		for (String cat : this.category) {
 			categories.append(cat);
@@ -144,6 +151,14 @@ public class Book implements Comparable<Book>{
 	@Override
 	public int compareTo(Book o) {
 		return this.hashCode()-o.hashCode();	
+	}
+	
+	public boolean isWrittenBy(Author a) {
+		return authors.contains(a);
+	}
+	
+	public void addAuthor(Author a) {
+		this.authors.add(a);
 	}
 
 	

@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Map.Entry;
 
 public class Rack {
 	private String local;
@@ -34,6 +37,33 @@ public class Rack {
 		return this.books;
 	}
 	
+	public TreeMap<Author,List<Book>> booksByAuthor() {
+		TreeMap<Author,List<Book>> authorBooks = new TreeMap<>();
+		for (Book book : books) {
+			for (Author auth : book.getAuthors()) {
+				if (!authorBooks.containsKey(auth)) {
+					authorBooks.put(auth, new ArrayList<Book>());
+				}
+				authorBooks.get(auth).add(book);
+			}
+			
+		}
+		return authorBooks;
+	}
+	
+	public TreeMap<String,List<Book>> getBooksByCategories() {
+		TreeMap<String,List<Book>> catBooks = new TreeMap<>();
+		for (Book book : books) {
+			for (String cat : book.getCategories()) {
+				if (!catBooks.containsKey(cat)) {
+					catBooks.put(cat, new ArrayList<Book>());
+				}
+				catBooks.get(cat).add(book);
+			}
+			
+		}
+		return catBooks;
+	}
 	
 	
 	

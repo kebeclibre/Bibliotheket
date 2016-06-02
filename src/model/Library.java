@@ -5,6 +5,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import model.bookComparators.BookPriceComparator;
+import model.bookComparators.IsbnComparator;
+import model.bookComparators.TitleComparator;
+
 public class Library {
 	private List<Rack> racks = new ArrayList<Rack>();
 	private String name;
@@ -54,6 +58,22 @@ public class Library {
 		Collections.sort(byprice, new BookPriceComparator());
 		return byprice;
 		
+	}
+	
+	public void addAuthorToBook(Author auth,Book b) {
+		b.addAuthor(auth);
+	}
+	
+	public List<Book> getBooksByTitle() {
+		List<Book> books = getAllBooks();
+		Collections.sort(books,new TitleComparator());
+		return books;
+	}
+	
+	public List<Book> getBooksByIsbn() {
+		List<Book> books = getAllBooks();
+		Collections.sort(books,new IsbnComparator());
+		return books;
 	}
 	
 }
